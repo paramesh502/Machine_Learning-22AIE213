@@ -1,0 +1,247 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------------- Typography ---------------- */
+:root {
+  --ease-apple: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* surfaces + text */
+  --bg: #ffffff;
+  --surface-1: #ffffff;
+  --surface-2: #f5f5f7;
+  --text: #1d1d1f;
+  --text-soft: rgba(29, 29, 31, 0.72);
+  --text-muted: #86868b;
+
+  /* glass tokens */
+  --glass-bg: rgba(255, 255, 255, 0.65);
+  --glass-border: rgba(0, 0, 0, 0.06);
+  --glass-shadow-inset: 0 1px 0 rgba(255, 255, 255, 0.35) inset;
+
+  /* widgets */
+  --gauge-track: rgba(0, 0, 0, 0.08);
+
+  /* charts */
+  --chart-grid: rgba(0, 0, 0, 0.06);
+  --chart-tick: #86868b;
+  --chart-tooltip-bg: #ffffff;
+  --chart-tooltip-text: #1d1d1f;
+  --chart-tooltip-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --chart-cursor: rgba(0, 0, 0, 0.04);
+  --chart-f1-bar: #1d1d1f;
+
+  /* accents (shared) */
+  --accent-blue: #0071e3;
+  --accent-purple: #bf5af2;
+  --accent-pink: #ff2d55;
+  --accent-green: #34c759;
+  --accent-orange: #ff9f0a;
+}
+
+.dark {
+  /* pure black stage like the hero */
+  --bg: #000000;
+  --surface-1: #0a0a0c;
+  --surface-2: #141418;
+  --text: #f5f5f7;
+  --text-soft: rgba(245, 245, 247, 0.78);
+  --text-muted: #9f9fa6;
+
+  /* glass — subtly lit translucent panel that reads on pure black */
+  --glass-bg: rgba(22, 22, 26, 0.66);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow-inset: 0 1px 0 rgba(255, 255, 255, 0.05) inset;
+
+  --gauge-track: rgba(255, 255, 255, 0.12);
+
+  /* charts use the Apple dark accents */
+  --chart-grid: rgba(255, 255, 255, 0.08);
+  --chart-tick: #9f9fa6;
+  --chart-tooltip-bg: rgba(22, 22, 26, 0.96);
+  --chart-tooltip-text: #f5f5f7;
+  --chart-tooltip-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  --chart-cursor: rgba(255, 255, 255, 0.06);
+  --chart-f1-bar: #e5e5e7;
+
+  --accent-blue: #0a84ff;
+  --accent-purple: #bf5af2;
+  --accent-pink: #ff375f;
+  --accent-green: #30d158;
+  --accent-orange: #ff9f0a;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, Inter,
+    "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  background: var(--bg);
+}
+
+body.dark {
+  background: #000000;
+  color: #f5f5f7;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, Inter,
+    sans-serif;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+}
+
+/* text-color helpers driven by CSS vars (keep existing Tailwind classes working) */
+.dark .text-apple-black,
+.dark .text-apple-black\/90 {
+  color: #f5f5f7 !important;
+}
+.dark .text-apple-gray {
+  color: var(--text-muted);
+}
+
+/* ---------------- Glass ---------------- */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: saturate(180%) blur(22px);
+  -webkit-backdrop-filter: saturate(180%) blur(22px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow-inset);
+}
+
+.dark .glass {
+  /* add a subtle conic / radial tint so cards feel lit instead of flat grey */
+  background:
+    radial-gradient(120% 120% at 0% 0%, rgba(10, 132, 255, 0.06), transparent 60%),
+    radial-gradient(120% 120% at 100% 100%, rgba(191, 90, 242, 0.05), transparent 60%),
+    rgba(18, 18, 22, 0.7);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 10px 40px rgba(0, 0, 0, 0.45);
+}
+
+/* ---------------- Hero gradient (light + dark) ---------------- */
+.hero-grad {
+  background:
+    radial-gradient(60% 40% at 50% 0%, rgba(0, 113, 227, 0.18), transparent 70%),
+    radial-gradient(40% 30% at 80% 20%, rgba(191, 90, 242, 0.12), transparent 70%),
+    radial-gradient(40% 30% at 20% 80%, rgba(88, 200, 250, 0.10), transparent 70%),
+    linear-gradient(180deg, #ffffff 0%, #f5f5f7 100%);
+}
+
+.dark .hero-grad {
+  background:
+    radial-gradient(60% 40% at 50% 0%, rgba(10, 132, 255, 0.28), transparent 70%),
+    radial-gradient(40% 30% at 80% 20%, rgba(191, 90, 242, 0.18), transparent 70%),
+    radial-gradient(40% 30% at 20% 80%, rgba(88, 200, 250, 0.12), transparent 70%),
+    linear-gradient(180deg, #000000 0%, #050508 100%);
+}
+
+/* ---------------- Section ambience (dark) ----------------
+   Match the hero's lit-black feel across Analyze / How-it-works / Science.
+*/
+.dark section {
+  background-color: #000000;
+}
+
+.dark #analyze {
+  background:
+    radial-gradient(50% 35% at 20% 0%, rgba(10, 132, 255, 0.10), transparent 70%),
+    radial-gradient(45% 30% at 90% 30%, rgba(191, 90, 242, 0.08), transparent 70%),
+    radial-gradient(40% 30% at 50% 100%, rgba(48, 209, 88, 0.06), transparent 70%),
+    #000000;
+}
+
+.dark #how {
+  background:
+    radial-gradient(45% 35% at 80% 0%, rgba(10, 132, 255, 0.08), transparent 70%),
+    radial-gradient(40% 30% at 10% 100%, rgba(255, 55, 95, 0.06), transparent 70%),
+    #000000;
+}
+
+.dark #science {
+  background:
+    radial-gradient(45% 35% at 50% 0%, rgba(10, 132, 255, 0.10), transparent 70%),
+    radial-gradient(40% 40% at 100% 100%, rgba(191, 90, 242, 0.06), transparent 70%),
+    #050508 !important;
+}
+
+/* ---------------- Shimmer (unchanged) ---------------- */
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 113, 227, 0.12) 40%,
+    rgba(0, 113, 227, 0.32) 50%,
+    rgba(0, 113, 227, 0.12) 60%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2.5s linear infinite;
+}
+
+/* ---------------- Noise grain overlay ---------------- */
+.noise::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(
+    rgba(0, 0, 0, 0.035) 1px,
+    transparent 1px
+  );
+  background-size: 3px 3px;
+  mix-blend-mode: multiply;
+  opacity: 0.4;
+}
+
+/* kill the white-haze in dark mode — it was making the section look muddy grey */
+.dark .noise::after {
+  display: none;
+}
+
+/* ---------------- Selection + focus ---------------- */
+::selection {
+  background: var(--accent-blue);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------------- Scrollbars ---------------- */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* ---------------- Recharts tooltip in dark mode ----------------
+   Recharts renders a .recharts-default-tooltip; we theme it via CSS vars.
+*/
+.recharts-default-tooltip,
+.recharts-tooltip-wrapper .recharts-tooltip-item-list,
+.recharts-tooltip-wrapper .recharts-tooltip-label {
+  color: var(--chart-tooltip-text) !important;
+}
+
+.dark .recharts-cartesian-axis-tick text,
+.dark .recharts-polar-angle-axis-tick text,
+.dark .recharts-text {
+  fill: var(--chart-tick) !important;
+}

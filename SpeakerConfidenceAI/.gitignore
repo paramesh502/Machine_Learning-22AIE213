@@ -1,0 +1,54 @@
+# ---------- OS / editor ----------
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+.Python
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+
+# ---------- Node / Next.js ----------
+node_modules/
+.next/
+out/
+dist/
+build/
+.turbo/
+*.tsbuildinfo
+next-env.d.ts
+
+# ---------- Logs ----------
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# ---------- Env / secrets ----------
+.env
+.env.*
+!.env.example
+
+# ---------- Backups / scratch ----------
+*.bak
+*.orig
+*.tmp
+research/training_notebook.ipynb.bak
+
+# ---------- Large / generated artifacts ----------
+# keep model/*.joblib if you want the trained model checked in; otherwise uncomment:
+# model/*.joblib
+# model/*.pkl
+
+# Build outputs that are produced by the paper/viva/ppt scripts
+outputs/paper/node_modules/
